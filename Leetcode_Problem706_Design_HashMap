@@ -1,0 +1,42 @@
+struct hashMap { 
+    int index, flag; 
+};
+
+typedef struct {
+    struct hashMap *hash;
+} MyHashMap;
+
+MyHashMap* myHashMapCreate() {
+    MyHashMap *HashMap = malloc(sizeof *HashMap);
+    HashMap->hash = calloc(1, sizeof(struct hashMap [100000]));
+    return HashMap;
+}
+
+void myHashMapPut(MyHashMap* obj, int key, int value) {
+    obj->hash[key].index = value;
+    obj->hash[key].flag = 1;
+}
+
+int myHashMapGet(MyHashMap* obj, int key) {
+    return obj->hash[key].flag ? obj->hash[key].index : -1;
+}
+
+void myHashMapRemove(MyHashMap* obj, int key) {
+    obj->hash[key].flag = 0;
+}
+
+void myHashMapFree(MyHashMap* obj) {
+    free(obj);
+}
+
+/**
+ * Your MyHashMap struct will be instantiated and called as such:
+ * MyHashMap* obj = myHashMapCreate();
+ * myHashMapPut(obj, key, value);
+ 
+ * int param_2 = myHashMapGet(obj, key);
+ 
+ * myHashMapRemove(obj, key);
+ 
+ * myHashMapFree(obj);
+*/
